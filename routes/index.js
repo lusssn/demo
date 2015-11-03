@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose/lib');
+var mongoose = require('mongoose');
 var user = require('../models/users').users;
+//var bodyParser = require('body-parser');
 mongoose.connect('mongodb://localhost/lusssn');
 
 /* GET home page. */
@@ -33,6 +34,14 @@ router.post('/homepage', function(req, res) {
             }
         });
     })(query_doc);
+});
+ 
+router.get('/test', function(req, res) {
+    console.log(req.body);
+    if (req.body.test == 1) {
+        res.json({title: 'success'});
+    } else
+        res.json({title: 'failed'});
 });
 
 module.exports = router;

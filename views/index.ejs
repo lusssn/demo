@@ -3,10 +3,31 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript" src="/javascripts/jquery-1.7.2.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <a href="login">登录</a>
+    <a href="javascript:void(0);" id="loginBtn">登录</a>
   </body>
+  <script type="text/javascript">
+  	$("#loginBtn").unbind("click").click(function(){
+  		var params ={
+                'test' : 1
+            };
+            $.ajax({
+                data: params,
+                url: '/test',
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                	console.log(data);
+	                alert(data.title);
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert('error ' + textStatus + " " + errorThrown);  
+                }
+            });
+  		});
+  </script>>
 </html>

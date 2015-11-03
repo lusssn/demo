@@ -1,4 +1,4 @@
-var mongoose = require("mongoose/lib");  //  顶会议用户组件
+var mongoose = require("mongoose");  //  顶会议用户组件
 var Schema = mongoose.Schema;    //  创建模型
 var userScheMa = new Schema({
     uid: String,
