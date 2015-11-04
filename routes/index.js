@@ -36,7 +36,7 @@ router.post('/homepage', function(req, res) {
     })(query_doc);
 });
  
-router.get('/test', function(req, res) {
+router.post('/test', function(req, res) {
     console.log(req.body);
     if (req.body.test == 1) {
         res.json({title: 'success'});
