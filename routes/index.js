@@ -7,41 +7,33 @@ mongoose.connect('mongodb://localhost/lusssn');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'lsn\'s demo' });
+    console.log("render index...");
+    res.render('index');
 });
 
 /*login*/
-router.get('/login', function(req, res) {
-    res.render('login', { title: 'login' });
-});
-
-/*logout*/
-router.get('/logout', function(req, res) {
-      res.render('logout', { title: 'logout' });
-});
-
-/*hompage*/
-router.post('/homepage', function(req, res) {
-    var query_doc = {uid: req.body.uid, password: req.body.password};
+router.post('/login', function(req, res) {
+    var query_doc = {
+        uid: req.body.uid, 
+        password: req.body.password
+    };
     (function(){
         user.count(query_doc, function(err, doc){
             if(doc == 1){
                 console.log(query_doc.uid + ": login success in " + new Date());
+                res.json({msg: '验证成功'});
                 res.render('homepage', { title: 'homepage' });
             }else{
                 console.log(query_doc.uid + ": login failed in " + new Date());
-                res.redirect('/');
+                res.json({msg: '用户名或密码错误'});
             }
         });
     })(query_doc);
 });
- 
-router.post('/test', function(req, res) {
-    console.log(req.body);
-    if (req.body.test == 1) {
-        res.json({title: 'success'});
-    } else
-        res.json({title: 'failed'});
+
+/*logout*/
+router.get('/logout', function(req, res) {
+    res.render('logout', { title: 'logout' });
 });
 
 module.exports = router;
