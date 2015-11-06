@@ -7,9 +7,10 @@ var bodyParser = require('body-parser');
 var ejs = require('ejs');
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var log4js = require('./routes/log4js'); 
 
 var app = express();
-
+log4js.use(app);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.html', ejs.__express);
@@ -56,6 +57,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;

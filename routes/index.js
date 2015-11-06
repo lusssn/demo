@@ -3,11 +3,12 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var user = require('../models/users').users;
 //var bodyParser = require('body-parser');
+var LOG = require('./log4js').logger;
 mongoose.connect('mongodb://localhost/lusssn');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    console.log("render index...");
+    LOG.info("log test");
     res.render('index');
 });
 
@@ -21,11 +22,10 @@ router.post('/login', function(req, res) {
         user.count(query_doc, function(err, doc){
             if(doc == 1){
                 console.log(query_doc.uid + ": login success in " + new Date());
-                res.json({msg: '验证成功'});
-                res.render('homepage', { title: 'homepage' });
+                res.json({success: true,msg: '登录成功',redirect: '/homepage'});
             }else{
                 console.log(query_doc.uid + ": login failed in " + new Date());
-                res.json({msg: '用户名或密码错误'});
+                res.json({success: false,msg: '用户名或密码错误'});
             }
         });
     })(query_doc);
@@ -35,5 +35,7 @@ router.post('/login', function(req, res) {
 router.get('/logout', function(req, res) {
     res.render('logout', { title: 'logout' });
 });
+
+
 
 module.exports = router;

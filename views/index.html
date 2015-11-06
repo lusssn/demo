@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-		<title>YBOX</title>
+		<title>Y.Box</title>
 		<link rel='stylesheet' href='/stylesheets/style.css' />
 		<script type="text/javascript" src="/javascripts/jquery-1.7.2.js"></script>
     </head>
     <body>
 		<div class="container">
 			<header>
-				<h1>Welcome to YBOX</h1>
+				<h1>Welcome to Y.Box</h1>
 				<p>This is a personal blog.</p>
 			</header>
 			<img id="illustration" src="/images/lotusSeedPod.png" /><div class="clear" ></div>
@@ -33,7 +33,13 @@
 				type: 'post',
 				dataType: 'json',
 				success: function(data){
-					console.log(data);
+					if (data.success) {
+						alert(data.msg);
+						window.location.href = data.redirect;
+					} else {
+						$(".login-box input").val("");
+						alert(data.msg);
+					}
 				},
 				error: function(jqXHR, textStatus, errorThrown){
 				  alert('error ' + textStatus + " " + errorThrown);  
