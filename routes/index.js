@@ -31,11 +31,13 @@ router.post('/login', function(req, res) {
     })(query_doc);
 });
 
+router.get('/homepage', function(req, res){
+    res.render('homepage',{ title: 'homepage'});
+});
+
 /*logout*/
 router.get('/logout', function(req, res) {
     res.render('logout', { title: 'logout' });
 });
-
-
 
 module.exports = router;

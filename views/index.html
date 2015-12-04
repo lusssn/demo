@@ -34,7 +34,7 @@
 				dataType: 'json',
 				success: function(data){
 					if (data.success) {
-						alert(data.msg);
+						alert(data.redirect);
 						window.location.href = data.redirect;
 					} else {
 						$(".login-box input").val("");
