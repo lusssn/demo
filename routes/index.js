@@ -1,37 +1,53 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-var user = require('../models/users').users;
-//var bodyParser = require('body-parser');
-var LOG = require('./log4js').logger;
-mongoose.connect('mongodb://localhost/lusssn');
+var UsersModel = require('../models/Users').UsersModel;
+var LOG = require('../models/log4js').logger;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    LOG.info("log test");
     res.render('index');
 });
 
 /*login*/
 router.post('/login', function(req, res) {
-    var query_doc = {
-        uid: req.body.uid, 
+    var user = new UsersModel({
+        nickname: req.body.uid, 
         password: req.body.password
-    };
-    (function(){
-        user.count(query_doc, function(err, doc){
-            if(doc == 1){
-                console.log(query_doc.uid + ": login success in " + new Date());
-                res.json({success: true,msg: '登录成功',redirect: '/homepage'});
-            }else{
-                console.log(query_doc.uid + ": login failed in " + new Date());
-                res.json({success: false,msg: '用户名或密码错误'});
-            }
-        });
-    })(query_doc);
+    });
+
+    user.findUser(function(err, doc){
+        doc = doc[0];
+        if (doc != null) {
+            switch(doc.status) {
+                case 0:
+                    LOG.info("uid: " + doc.uid + " login success");
+                    res.json({success: true,msg: '登录成功',redirect: '/homepage'});
+                    break;
+                case 1:
+                    LOG.info("uid: " + doc.uid + " login success");
+                    res.json({success: true,msg: '已经登录',redirect: '/homepage'});
+                    break;
+                case 2:
+                    LOG.info("uid: " + doc.uid + " login failed");
+                    res.json({success: false,msg: '用户名或密码错误'});
+                    break;
+                default:
+                    LOG.info("uid: " + doc.uid + " login failed");
+                    res.json({success: false,msg: '未知错误'});
+            };
+        } else {
+            LOG.info("nickname: " + user.nickname + " login failed");
+                    res.json({success: false,msg: '未注册的用户'});
+        }
+    });
 });
 
-router.get('/homepage', function(req, res){
+/*register*/
+router.post('/register', function(req, res) {
+
+});
+
+router.get('/homepage', function(req, res) {
     res.render('homepage',{ title: 'homepage'});
 });
 

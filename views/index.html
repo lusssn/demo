@@ -2,8 +2,9 @@
 <html>
     <head>
 		<title>Y.Box</title>
-		<link rel='stylesheet' href='/stylesheets/style.css' />
+		<link rel='stylesheet' href='/stylesheets/index.css' />
 		<script type="text/javascript" src="/javascripts/jquery-1.7.2.js"></script>
+		<script type="text/javascript" src="/javascripts/index.js"></script>
     </head>
     <body>
 		<div class="container">
@@ -11,40 +12,27 @@
 				<h1>Welcome to Y.Box</h1>
 				<p>This is a personal blog.</p>
 			</header>
-			<img id="illustration" src="/images/lotusSeedPod.png" /><div class="clear" ></div>
+			<img id="illustration" src="/images/lotusSeedPod.png" /><div class="clear"></div>
 			<div class="login-box">
-				<input id="uid" name="uid" type="text" placeholder="User">
+				<input id="nickname" name="nickname" type="text" placeholder="Username">
 				<input id="password" name="password" type="password" placeholder="Password"><br/>
-				<a href="javascript:void(0);" id="loginBtn">登入</a>
-				<a href="javascript:void(0);" id="registerBtn">注册</a>
+				<a href="javascript:void(0);" class="loginBtn" id="loginSub">登入</a>
+				<a href="javascript:void(0);" class="registerBtn" id="skipRegister">注册</a>
+			</div>
+
+			<div class="register-box">
+				<input id="nickname" name="nickname" type="text" placeholder="Username">
+				<input id="password" name="password" type="password" placeholder="Password"><br/>
+				<input id="name" name="name" type="text" placeholder="Name">
+				<input id="birthday" name="birthday" type="text" placeholder="Birthday"><br/>
+				<input id="sex" name="sex" type="text" placeholder="Sex">
+				<input id="e_mail" name="e_mail" type="text" placeholder="E-mail"><br/>
+				<a href="javascript:void(0);" class="registerBtn" id="registerSub">注册</a>
+				<a href="javascript:void(0);" class="loginBtn" id="skipLogin">返回登录</a>
 			</div>
 		</div>
     </body>
     <script type="text/javascript">
-	  	$("#loginBtn").unbind("click").click(function(){
-			var params = {
-				'uid': $("#uid").val(),
-				'password': $("#password").val()
-	      	};
-	      	console.log(params);
-	        $.ajax({
-				data: params,
-				url: '/login',
-				type: 'post',
-				dataType: 'json',
-				success: function(data){
-					if (data.success) {
-						alert(data.redirect);
-						window.location.href = data.redirect;
-					} else {
-						$(".login-box input").val("");
-						alert(data.msg);
-					}
-				},
-				error: function(jqXHR, textStatus, errorThrown){
-				  alert('error ' + textStatus + " " + errorThrown);  
-				}
-	        });
-		});
+    	Index();
     </script>
 </html>

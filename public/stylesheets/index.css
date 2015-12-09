@@ -1,0 +1,78 @@
+body {
+	background: url(../images/exclusive_paper.png);
+	font: 14px Gulim;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+header {
+	padding: 15px 0 10px 80px;
+}
+a {
+	text-decoration: none;
+	font-family: "幼圆";
+}
+.container {
+	position: relative;
+	width: 900px;
+	height: 900px;
+	left: 50%;
+	margin-left: -450px;
+	padding-top: 70px;
+	overflow: hidden;
+	background: rgba(255,255,255,0.3);
+}
+#illustration {
+	position: absolute;
+	display: inline-block;
+	left: 20%;
+	top: 30%;
+}
+.login-box {
+	position: relative;
+	top: 30%;
+	width: 200px;
+	left: 50%;
+	margin-left: -100px;
+}
+.login-box input, 
+.login-box .loginBtn,
+.register-box input,
+.register-box .registerBtn {
+	width: 194px;
+	height: 20px;
+	padding: 5px;
+	border: none;
+	border-radius: 3px;
+	margin: 10px 0 10px 0;
+}
+.login-box .loginBtn,
+.register-box .registerBtn {
+	display: inline-block;
+	background-color: #8a6d4c;
+	text-decoration: none;
+	color: black;
+	font-size: 18px;
+	text-align: center;
+	letter-spacing: 10px;
+}
+.clear {
+	clear: both;
+}
+.register-box {
+	position: absolute;
+	top: 27.3%;
+	width: 200px;
+	left: 50%;
+	margin-left: -100px;
+	display: none; 
+}
+.login-box .registerBtn,
+.register-box .loginBtn {
+	float: right;
+}
+.register-box .loginBtn:hover, 
+.login-box .registerBtn:hover {
+    color: #00B7FF;
+}

@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var ejs = require('ejs');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var log4js = require('./routes/log4js'); 
+var log4js = require('./models/log4js'); 
 
 var app = express();
 log4js.use(app);

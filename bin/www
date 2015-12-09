@@ -7,7 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('lusssn:server');
 var http = require('http');
-
+var LOG = require('../models/log4js').logger;
 /**
  * Get port from environment and store in Express.
  */
@@ -87,5 +87,4 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   console.log('Listening on ' + bind);
-  //debug('Listening on ' + bind);
 }
