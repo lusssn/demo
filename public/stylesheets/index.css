@@ -1,78 +1,74 @@
 body {
-	background: url(../images/exclusive_paper.png);
-	font: 14px Gulim;
+	background: url(../images/grunge_wall.jpg);
+	font: 14px 'Lucida Calligraphy';
+	color:  #5d5959;
 	width: 100%;
 	height: 100%;
 	padding: 0;
 	margin: 0;
 }
-header {
-	padding: 15px 0 10px 80px;
-}
-a {
-	text-decoration: none;
-	font-family: "幼圆";
-}
 .container {
 	position: relative;
-	width: 900px;
-	height: 900px;
-	left: 50%;
-	margin-left: -450px;
-	padding-top: 70px;
-	overflow: hidden;
-	background: rgba(255,255,255,0.3);
+	width: 940px;
+	height: 50%;
+	margin-left: 50%;
+	margin-top: 15%;
+	left: -470px;
 }
-#illustration {
-	position: absolute;
-	display: inline-block;
-	left: 20%;
-	top: 30%;
+header {
+	display: flex;
+	width: 100%;
+	align-items: flex-end;
+	justify-content: space-between;
 }
-.login-box {
-	position: relative;
-	top: 30%;
-	width: 200px;
-	left: 50%;
-	margin-left: -100px;
+.logo, .share-link {
+	width: 11%;
 }
-.login-box input, 
-.login-box .loginBtn,
-.register-box input,
-.register-box .registerBtn {
-	width: 194px;
-	height: 20px;
-	padding: 5px;
-	border: none;
-	border-radius: 3px;
-	margin: 10px 0 10px 0;
-}
-.login-box .loginBtn,
-.register-box .registerBtn {
-	display: inline-block;
-	background-color: #8a6d4c;
-	text-decoration: none;
-	color: black;
-	font-size: 18px;
+.year-show {
+	width: 10%;
+	font-size: 1.5em;
 	text-align: center;
-	letter-spacing: 10px;
 }
-.clear {
-	clear: both;
-}
-.register-box {
-	position: absolute;
-	top: 27.3%;
-	width: 200px;
-	left: 50%;
-	margin-left: -100px;
-	display: none; 
-}
-.login-box .registerBtn,
-.register-box .loginBtn {
+.link-icon {
+	width: 30px;
 	float: right;
+	margin-left: 5px;
+	margin-right: 5px;
 }
-.register-box .loginBtn:hover, 
-.login-box .registerBtn:hover {
-    color: #00B7FF;
+.main, .logo-icon {
+	width: 100%;
+}
+.wrap hr {
+	height: 2px;
+	background-color: #5d5959;
+}
+.welcome {
+	display: flex;
+	width: 100%;
+	height: 80px;
+	align-items: center;
+}
+.form-group {
+	margin-top: 50px;
+}
+.login-group {
+	display: flex;
+	width: 80%;
+	height: 40px;
+	margin-left: 10%;
+	align-items: center;
+}
+.login-group input {
+	flex: 2;
+	height: 64%;
+	padding: 5px;
+}
+.login-group a {
+	flex: 1;
+	height: 100%;
+	text-decoration: none;
+	background-color: #5d5959;
+	color: #FFFFFF;
+	line-height: 40px;
+	text-align: center;
 }
