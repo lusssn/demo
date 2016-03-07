@@ -12,7 +12,7 @@ body {
 	width: 940px;
 	height: 50%;
 	margin-left: 50%;
-	margin-top: 15%;
+	margin-top: 13%;
 	left: -470px;
 }
 header {
@@ -34,6 +34,10 @@ header {
 	float: right;
 	margin-left: 5px;
 	margin-right: 5px;
+	background-color: #5d5959;
+}
+.link-icon:hover {
+	background-color: #FF2465;
 }
 .main, .logo-icon {
 	width: 100%;
@@ -71,4 +75,22 @@ header {
 	color: #FFFFFF;
 	line-height: 40px;
 	text-align: center;
+}
+.login-group a:hover {
+	background-color: #FF2465;
+}
+.rider {
+	display: flex;
+	margin-top: 8%;
+	font-size: 1.75em;
+	word-spacing: 0.25em;
+	justify-content: space-around;
+}
+.rider a {
+	color: #5d5959;
+	word-spacing: 0em;
+}
+.rider a:hover {
+	text-decoration: none;
+	color: #FF2465;
 }
