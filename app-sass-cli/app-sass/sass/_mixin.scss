@@ -1,0 +1,30 @@
+/* 设置元素居中 */
+@mixin elm-centered($position: relative, $width: 100%) {
+	position: $position;
+	left: -($width / 2);
+	margin-left: 50%;
+}
+
+/* 设置input框样式 */
+@mixin input-primary($height: 40px, $padding: 5px, $font-size: 14px) {
+	height: $height;
+	padding-left: $padding;
+	padding-right: $padding;
+	padding-top: $padding / 2;
+	padding-bottom: $padding / 2;
+	font-size: $font-size;
+}
+
+/* 设置a标签的按钮样式 */
+@mixin btn($height: 100%, $line-height: 40px, 
+	$bkg-color: $dark-gray-color, $bkg-color-h: $rose-red-color) {
+	line-height: $line-height;
+    height: $height;
+    text-align: center;
+    text-decoration: none;
+    color: $white-color;
+    background-color: $bkg-color;
+    &:hover {
+    	background-color: $bkg-color-h;
+    }
+}
