@@ -4,6 +4,9 @@ loginModule.controller("LoginController", function($scope) {
 		nickname: "",
 		password: ""
 	};
+	$scope.flag = false;
+
+	// 登录事件
 	$scope.signIn = function() {
 		console.log($scope.userInfo);
 		$.ajax({

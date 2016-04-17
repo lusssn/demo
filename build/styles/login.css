@@ -136,12 +136,12 @@ header {
   align-items: center;
 }
 .login-group input {
-  height: 64%;
+  height: 77%;
   padding-left: 5px;
   padding-right: 5px;
   padding-top: 2.5px;
   padding-bottom: 2.5px;
-  font-size: 14px;
+  font-size: 16px;
   flex: 2;
 }
 .login-group a {

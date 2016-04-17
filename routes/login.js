@@ -1,5 +1,3 @@
-//var express = require('express');
-//var router = express.Router();
 var path = require('path');
 var UsersModel = require('../models/Users').UsersModel;
 var LOG = require('../models/log4js').logger;
@@ -43,4 +41,3 @@ exports.signIn = function (req, res) {
     });
 };
 
-//module.exports = router;

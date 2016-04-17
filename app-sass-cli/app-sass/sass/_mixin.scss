@@ -6,7 +6,7 @@
 }
 
 /* 设置input框样式 */
-@mixin input-primary($height: 40px, $padding: 5px, $font-size: 14px) {
+@mixin input-primary($height: 40px, $padding: 5px, $font-size: 16px) {
 	height: $height;
 	padding-left: $padding;
 	padding-right: $padding;

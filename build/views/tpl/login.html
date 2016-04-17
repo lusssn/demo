@@ -6,9 +6,10 @@
 		<script type="text/javascript" src="/lib/jquery-1.7.2.js"></script>
 		<script type="text/javascript" src="/angular/angular.min.js"></script>
 		<script type="text/javascript" src="/scripts/appLogin/controllers/LoginController.js"></script>
+		<script type="text/javascript" src="/scripts/appLogin/directives/LoginDirective.js"></script>
     </head>
     <body ng-app="loginModule">
-		<div class="container">
+		<div class="container" ng-controller="LoginController">
 			<header>
 				<div class="logo">
 					<img src="/images/logo-small.png" alt="" class="logo-icon">
@@ -30,23 +31,23 @@
 				</div>
 		
 				<div class="form-group">
-					<form class="login-group" ng-controller="LoginController">
+					<form class="login-group">
 						<input ng-model="userInfo.nickname" type="text" placeholder="Username">
 						<input ng-model="userInfo.password" type="password" placeholder="Password">
-						<a class="login-btn" href="javascript:void(0);" ng-click="signIn()">Sign in</a>
+						<a class="login-btn" href="javascript:void(0);" login >Sign in</a>
 					</form>
 				</div>	
 		
 				<section class="rider">
 					<h>Welcome to Y Box, if you havent the account, please 
-						<a href="javascript:void(0);">Sign up</a> 
+						<a href="javascript:void(0);" id="signUp" ng-click="flag = !flag">Sign up</a> 
 						first.
 					</h>
 				</section>
 			</div>
 			
 			<footer>
-				
+				<div register></div>
 			</footer>
 		</div>	
     </body>
