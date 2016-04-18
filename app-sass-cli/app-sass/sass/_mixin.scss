@@ -1,11 +1,11 @@
-/* 设置元素居中 */
+/* 通用元素居中 */
 @mixin elm-centered($position: relative, $width: 100%) {
 	position: $position;
 	left: -($width / 2);
 	margin-left: 50%;
 }
 
-/* 设置input框样式 */
+/* 通用input框样式 */
 @mixin input-primary($height: 40px, $padding: 5px, $font-size: 16px) {
 	height: $height;
 	padding-left: $padding;
@@ -15,7 +15,7 @@
 	font-size: $font-size;
 }
 
-/* 设置a标签的按钮样式 */
+/* 通用a标签的按钮样式 */
 @mixin btn($height: 100%, $line-height: 40px, 
 	$bkg-color: $dark-gray-color, $bkg-color-h: $rose-red-color) {
 	line-height: $line-height;
@@ -27,4 +27,12 @@
     &:hover {
     	background-color: $bkg-color-h;
     }
+}
+
+/* 通用hr基础样式 */
+@mixin hr-common {
+	border: 0;
+    height: 1px;
+    background-color: $light-gray-color;
+    margin: 10px 0 10px 0;
 }

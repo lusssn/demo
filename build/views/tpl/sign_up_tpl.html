@@ -1,8 +1,9 @@
-<div class="register-box" ng-show="flag" ng-click="flag = !flag">
+<div class="register-box" ng-show="showflag" ng-click="changeShow($event)">
 	<div class="register-content">
 		<section class="register-title">
 			<h>Welcome to Sign up Y Box</h>
 		</section>
+		<hr>
 		<form class="register-group">
 			<input id="nickname" name="nickname" type="text" placeholder="Username">
 			<input id="password" name="password" type="password" placeholder="Password">
@@ -11,8 +12,8 @@
 			<input id="sex" name="sex" type="text" placeholder="Sex">
 			<input id="e_mail" name="e_mail" type="text" placeholder="E-mail">
 			<div class="register-btns">
-				<a href="javascript:void(0);" class="registerBtn" id="registerSub">Sign up</a>
-			<a href="javascript:void(0);" class="loginBtn" id="skipLogin">Cancel</a>
+				<a href="javascript:void(0);" id="registerSub">Sign up</a>
+				<a href="javascript:void(0);" id="registerCancel">Cancel</a>
 			</div>
 		</form>
 	</div>

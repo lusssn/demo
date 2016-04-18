@@ -4,7 +4,13 @@ loginModule.controller("LoginController", function($scope) {
 		nickname: "",
 		password: ""
 	};
-	$scope.flag = false;
+	$scope.showflag = false;
+	$scope.changeShow = function($event) {
+		if ($event.target.id == "registerCancel" || $event.target == $event.currentTarget) {
+		    $scope.showflag = !$scope.showflag;
+		}
+		return false;
+	};
 
 	// 登录事件
 	$scope.signIn = function() {

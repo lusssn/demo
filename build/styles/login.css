@@ -1,9 +1,10 @@
 @charset "UTF-8";
 /* 字体变量 */
 /* 颜色变量 */
-/* 设置元素居中 */
-/* 设置input框样式 */
-/* 设置a标签的按钮样式 */
+/* 通用元素居中 */
+/* 通用input框样式 */
+/* 通用a标签的按钮样式 */
+/* 通用hr基础样式 */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -232,4 +233,10 @@ header {
 }
 .register-content .register-group .register-btns a:hover {
   background-color: #ff2465;
+}
+.register-content hr {
+  border: 0;
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 15px 0 15px 0;
 }
