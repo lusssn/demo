@@ -24,7 +24,7 @@ loginModule.directive("showtrigger", function() {
 	}
 });
 
-loginModule.directive("register", function() {
+loginModule.directive("showsignup", function() {
 	return {	
 		restrict: 'AE',
 		templateUrl: '/views/tpl/sign_up_tpl.html',
@@ -33,6 +33,17 @@ loginModule.directive("register", function() {
 		link: function(scope, element, attrs) {
 			/*$("#signUp").bind('click', scope.changeShow);
 			$('.register-box').bind('click', scope.changeShow);*/
+		}
+	};
+});
+
+loginModule.directive("register", function() {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs) {
+			element.bind('click', function(e) {
+				scope.signUp();
+			});
 		}
 	};
 });

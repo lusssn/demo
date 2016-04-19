@@ -1,12 +1,12 @@
-var mongoose = require("mongoose");  //  é¡¶ä¼šè®®ç”¨æˆ·ç»„ä»¶
-var Schema = mongoose.Schema;    //  åˆ›å»ºæ¨¡å‹
+var mongoose = require("mongoose");  //  ¶¥»áÒéÓÃ»§×é¼ş
+var Schema = mongoose.Schema;    //  ´´½¨Ä£ĞÍ
 var dbName = "lusssn";
-var db = mongoose.createConnection("localhost", dbName);	//  åˆ›å»ºæ•°æ®åº“è¿æ¥
-var LOG = require('./log4js').logger;
+var db = mongoose.createConnection("localhost", dbName);	//  ´´½¨Êı¾İ¿âÁ¬½Ó
+var Log = require('./log4js').logger;
 
-db.on("error",console.error.bind(console,"è¿æ¥é”™è¯¯:"));
+db.on("error",console.error.bind(console,"Á¬½Ó´íÎó:"));
 db.once("open",function(){
-	LOG.info("MongoDB connect to '" + dbName + "' successful");
+	Log.info("[REGISTER] MongoDB connect to '" + dbName + "' successful");
 });
 
 var UserSchema = new Schema({
@@ -19,10 +19,66 @@ var UserSchema = new Schema({
     e_mail: String,
     box_id: Number,
     status: Number
-}); //  å®šä¹‰äº†ä¸€ä¸ªæ–°çš„æ¨¡å‹ï¼Œä½†æ˜¯æ­¤æ¨¡å¼è¿˜æœªå’ŒUsersé›†åˆæœ‰å…³è”
+}); //  ¶¨ÒåÁËÒ»¸öĞÂµÄÄ£ĞÍ£¬µ«ÊÇ´ËÄ£Ê½»¹Î´ºÍUsers¼¯ºÏÓĞ¹ØÁª
 
-UserSchema.methods.findUser = function(cb) {
-	return this.model("users").find({nickname:this.nickname},cb);
+/* 
+ * [statics]¸ù¾İÓÃ»§êÇ³Æ¼ì²éÖØ¸´ÓÃ»§ 
+ */
+UserSchema.statics.checkDupliUser = function(nickname, callback) {
+    Log.info("[REGISTER] checkDupliUser");
+    this.findOne({nickname: nickname})
+        .nor([{status: 2}])
+        .exec(callback);
+}
+
+var UserModel = db.model('users', UserSchema);
+
+/* 
+ * [methods]¸ù¾İÓÃ»§êÇ³Æ¡¢ÃÜÂë²éÑ¯·Ç×¢ÏúµÄÓÃ»§ 
+ */
+UserSchema.methods.findUser = function(callback) {
+    UserModel.findOne({nickname: this.nickname, password: this.password})
+        .nor([{status: 2}])
+        .exec(callback);
 };
 
-exports.UsersModel = db.model("users", UserSchema, "Users"); //  ä¸Usersé›†åˆå…³è”
+
+/*
+ * [methods]ĞÂÔöÓÃ»§ĞÅÏ¢
+ */
+UserSchema.methods.addUser = function(callback) {
+    var newUser = new UserModel();
+    newUser.nickname = this.nickname;
+    newUser.password = this.password;
+    newUser.name = this.name;
+    newUser.birthday = this.birthday;
+    newUser.sex = this.sex;
+    newUser.e_mail = this.e_mail;
+    newUser.status = this.status;
+    Log.info("[REGISTER] ready checkDupliUser");
+    // ÏÈ²éÑ¯Êı¾İ¿â
+    UserModel.checkDupliUser(newUser.nickname, function(err, doc){
+        if (err) {
+            Log.error("[REGISTER] checkDupliUser Falid: ", err);
+            return callback(err);
+        } 
+        if (doc != null) {
+            Log.info("[REGISTER] The nickname: ", newUser.nickname, " has existed");
+            return callback(new Error("The nickname has existed"));
+        } else {
+            // ÎŞÖØ¸´ÓÃ»§Ôò½øĞĞÊı¾İ±£´æ
+            Log.info("[REGISTER] ready save");
+            newUser.save(function(err){
+                Log.info("[REGISTER] save end");
+                if(err){
+                    Log.info("[REGISTER] User Register Faild: ", err);
+                    return callback(err);
+                }
+            }, callback);
+        }
+
+    });
+    Log.info("[REGISTER] checkDupliUser end");
+};
+
+exports.UsersModel = db.model("users", UserSchema, "users"); //  ÓëUsers¼¯ºÏ¹ØÁª

@@ -5,14 +5,14 @@
 		</section>
 		<hr>
 		<form class="register-group">
-			<input id="nickname" name="nickname" type="text" placeholder="Username">
-			<input id="password" name="password" type="password" placeholder="Password">
-			<input id="name" name="name" type="text" placeholder="Name">
-			<input id="birthday" name="birthday" type="text" placeholder="Birthday">
-			<input id="sex" name="sex" type="text" placeholder="Sex">
-			<input id="e_mail" name="e_mail" type="text" placeholder="E-mail">
+			<input ng-model="userInfo.nickname" type="text" placeholder="Username">
+			<input ng-model="userInfo.password" type="password" placeholder="Password">
+			<input ng-model="userInfo.name" type="text" placeholder="Name">
+			<input ng-model="userInfo.birthday" type="text" placeholder="Birthday">
+			<input ng-model="userInfo.sex" type="text" placeholder="Sex">
+			<input ng-model="userInfo.e_mail" type="email" placeholder="E-mail">
 			<div class="register-btns">
-				<a href="javascript:void(0);" id="registerSub">Sign up</a>
+				<a href="javascript:void(0);" id="registerSub" register>Sign up</a>
 				<a href="javascript:void(0);" id="registerCancel">Cancel</a>
 			</div>
 		</form>
