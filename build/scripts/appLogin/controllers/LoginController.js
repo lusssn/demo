@@ -1,5 +1,5 @@
 var loginModule = angular.module("loginModule", []);
-loginModule.controller("LoginController", function($scope) {
+loginModule.controller("LoginController", ["$scope", "$http", function($scope, $http) {
 	$scope.userInfo = {
 		uid: 0,
 		nickname: "",
@@ -37,53 +37,49 @@ loginModule.controller("LoginController", function($scope) {
 
 	// 登录事件
 	$scope.signIn = function() {
-		$.ajax({
+		$http({
+			method: 'POST',
+			url: '/sign-in',
 			data: {
 				nickname: $scope.nickname,
 				password: $scope.password
 			},
-			url: '/sign-in',
-			type: 'post',
-			dataType: 'json',
-			success: function(data){
-				if (data.success) {
-					var dataObj = data.data;
-					for(var key in dataObj) {
-						$scope.userInfo[key] = dataObj[key];
-					}
-					console.log(data.data);
-					alert(data.msg);
-					//window.location.href = data.redirect;
-				} else {
-					$(".login-group input").val("");
-					alert(data.msg);
+			responseType: 'json'
+		}).success(function(data) {
+			if (data.success) {
+				var dataObj = data.data;
+				for(var key in dataObj) {
+					$scope.userInfo[key] = dataObj[key];
 				}
-			},
-			error: function(jqXHR, textStatus, errorThrown){
-			  alert('error ' + textStatus + " " + errorThrown);  
+				console.log(data.data);
+				alert(data.msg);
+				//window.location.href = data.redirect;
+			} else {
+				$(".login-group input").val("");
+				alert(data.msg);
 			}
-	    });
+		}).error(function(data) {
+			alert('error ' + data);
+		});
 	};
 
 	// 注册事件
 	$scope.signUp = function() {
-		$.ajax({
-			data: $scope.userInfo,
+		$http({
+			method: 'POST',
 			url: '/sign-up',
-			type: 'post',
-			dataType: 'json',
-			success: function(data){
-				if (data.success) {
-					alert(data.msg);
-					window.location.href = data.redirect;
-				} else {
-					$(".register-group input").val("");
-					alert(data.msg);
-				}
-			},
-			error: function(jqXHR, textStatus, errorThrown){
-			  alert('error: ' + textStatus + " " + errorThrown);  
+			data: $scope.userInfo,
+			responseType: 'json'
+		}).success(function(data) {
+			if (data.success) {
+				alert(data.msg);
+				window.location.href = data.redirect;
+			} else {
+				$(".register-group input").val("");
+				alert(data.msg);
 			}
-	    });
+		}).error(function(data) {
+			alert('error ' + data);
+		});
 	};
-})
+}]);
