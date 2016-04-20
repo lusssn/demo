@@ -1,4 +1,5 @@
 var loginModule = angular.module("loginModule", []);
+
 loginModule.controller("LoginController", ["$scope", "$http", function($scope, $http) {
 	$scope.userInfo = {
 		uid: 0,
@@ -39,13 +40,14 @@ loginModule.controller("LoginController", ["$scope", "$http", function($scope, $
 	$scope.signIn = function() {
 		$http({
 			method: 'POST',
-			url: '/sign-in',
+			url: '/login/sign-in',
 			data: {
 				nickname: $scope.nickname,
 				password: $scope.password
 			},
 			responseType: 'json'
 		}).success(function(data) {
+			console.log(data);
 			if (data.success) {
 				var dataObj = data.data;
 				for(var key in dataObj) {
@@ -53,7 +55,7 @@ loginModule.controller("LoginController", ["$scope", "$http", function($scope, $
 				}
 				console.log(data.data);
 				alert(data.msg);
-				//window.location.href = data.redirect;
+				window.location.href = data.redirect;
 			} else {
 				$(".login-group input").val("");
 				alert(data.msg);
@@ -67,7 +69,7 @@ loginModule.controller("LoginController", ["$scope", "$http", function($scope, $
 	$scope.signUp = function() {
 		$http({
 			method: 'POST',
-			url: '/sign-up',
+			url: '/login/sign-up',
 			data: $scope.userInfo,
 			responseType: 'json'
 		}).success(function(data) {

@@ -2,28 +2,27 @@ var path = require('path');
 var UsersModel = require('../models/Users').UsersModel;
 var Log = require('../models/log4js').logger;
 
-exports.index = function (req, res) {
-    var html = path.normalize(__dirname + '/../build/views/tpl/login.html');
-    res.sendfile(html);
-};
+// 0-已退出 1-已登录 2-已注销
+var accountStatus = 0;
 
-exports.signIn = function (req, res) {
+exports.signIn = function(req, res) {
     Log.info("ready login");
     var user = new UsersModel({
         nickname: req.body.nickname, 
         password: req.body.password
     });
 
-    user.findUser(function(err, doc){
+    user.findUser(function(err, doc) {
         if (doc != null) {
             switch(doc.status) {
                 case 0:
                     Log.info("uid: " + doc.uid + " login success");
-                    res.json({success: true,data: doc,msg: '登录成功',redirect: '/homepage'});
+                    accountStatus = 1;
+                    res.json({success: true,data: doc,msg: '登录成功',redirect: '/home'});
                     break;
                 case 1:
                     Log.info("uid: " + doc.uid + " login success");
-                    res.json({success: true,msg: '已经登录',redirect: '/homepage'});
+                    res.json({success: true,msg: '已经登录',redirect: '/home'});
                     break;
                 case 2:
                     Log.info("uid: " + doc.uid + " login failed");
@@ -40,7 +39,7 @@ exports.signIn = function (req, res) {
     });
 };
 
-exports.signUp = function (req, res) {
+exports.signUp = function(req, res) {
     Log.info("[REGISTER] ready register");
     var user = new UsersModel({
         nickname: req.body.nickname, 
@@ -52,13 +51,18 @@ exports.signUp = function (req, res) {
         status: req.body.status
     });
 
-    user.addUser(function(err){
+    user.addUser(function(err) {
         if (err) {
             res.json({success: false, msg: err});
         } else {
-            res.json({success: true, msg: 'register succeed ^_^',redirect: '/homepage'});
+            accountStatus = 1;
+            res.json({success: true, msg: 'register succeed ^_^',redirect: '/home'});
         }
     });
 
     Log.info("[REGISTER] register end");
+};
+
+exports.getAccountStatus = function() {
+    return accountStatus;
 };

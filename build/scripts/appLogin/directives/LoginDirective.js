@@ -1,3 +1,12 @@
+loginModule.directive("showindex", function() {
+	return {	
+		restrict: 'AE',
+		templateUrl: '/views/tpl/index_tpl.html',
+		replace: true
+	};
+});
+
+
 loginModule.directive("login", function() {
 	return {
 		restrict: 'A',
