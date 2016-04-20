@@ -16,10 +16,10 @@ exports.signIn = function (req, res) {
 
     user.findUser(function(err, doc){
         if (doc != null) {
-            switch(docs.status) {
+            switch(doc.status) {
                 case 0:
                     Log.info("uid: " + doc.uid + " login success");
-                    res.json({success: true,msg: '登录成功',redirect: '/homepage'});
+                    res.json({success: true,data: doc,msg: '登录成功',redirect: '/homepage'});
                     break;
                 case 1:
                     Log.info("uid: " + doc.uid + " login success");

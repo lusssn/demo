@@ -38,14 +38,22 @@ loginModule.controller("LoginController", function($scope) {
 	// 登录事件
 	$scope.signIn = function() {
 		$.ajax({
-			data: $scope.userInfo,
+			data: {
+				nickname: $scope.nickname,
+				password: $scope.password
+			},
 			url: '/sign-in',
 			type: 'post',
 			dataType: 'json',
 			success: function(data){
 				if (data.success) {
+					var dataObj = data.data;
+					for(var key in dataObj) {
+						$scope.userInfo[key] = dataObj[key];
+					}
+					console.log(data.data);
 					alert(data.msg);
-					window.location.href = data.redirect;
+					//window.location.href = data.redirect;
 				} else {
 					$(".login-group input").val("");
 					alert(data.msg);
