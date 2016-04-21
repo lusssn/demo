@@ -4,6 +4,7 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var favicon=require('serve-favicon');
 var ejs = require('ejs');
 
 var routes = require('./routes/routes');
@@ -13,10 +14,12 @@ var router = express.Router();
 var app = express();
 
 // view engine setup
+
 app.set('views', path.join(__dirname, 'build'));
 app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
 
+app.use(favicon(__dirname + '/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -1,0 +1,116 @@
+@import "variables";
+@import "mixin";
+@import "compass/reset";
+
+html {
+	font-family: $home-base-ff;
+    font-size: $home-menu-fs;
+    width: 100%;
+    height: 100%;
+	background: radial-gradient($from-gray-color -20%, $to-gray-color);
+}
+
+body {
+	width: 100%;
+    height: 100%;
+    color: $black-color;
+    background: url(../images/pattern.png);
+    overflow-y: hidden;
+}
+
+.home-container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.home-main {
+	display: flex;
+	flex-direction: row;
+	flex: 1;
+	height: 100%;
+	@at-root
+	.left-bar {
+		flex: 0 0 120px;
+		//display: flex;
+		//flex-direction: culumn;
+		font-weight: bold;
+		text-align: center;
+		cursor: default;
+		.first-tab {
+			width: 100%;
+			height: 50px;
+			background-color: $rose-red-color;
+			opacity: 0.8;
+			padding-top: 25px;
+			padding-bottom: 25px;
+			margin-top: 50%;
+			margin-bottom: 20px;
+			color: $light-gray-color;
+			line-height: 25px;
+		}
+		.menus {
+			background-color: $light-gray-color;
+			opacity: 0.8;
+			display: flex;
+			flex-direction: column;
+			align-content: space-between;
+
+			li {
+				width: 100%;
+				padding-top: 10px;
+				padding-bottom: 10px;
+
+				&:hover {
+			    	background-color: $rose-red-color;
+			    	color: $light-gray-color;
+			    }
+			}
+			@at-root
+			.active {
+				background-color: $rose-red-color;
+				color: $light-gray-color;
+			}
+		}
+	}
+	@at-root
+	.middle-content {
+		flex: 1;
+	}
+	@at-root
+	.right-logo {
+		flex: 0 0 160px;
+		overflow: hidden;
+		span {
+			display: block;
+			background-image: url('../images/logo.png');
+			background-repeat: no-repeat;
+			overflow: hidden;
+		}
+
+		.logo-wrap {
+			width: 82px;
+			height: 91px;
+			margin-left: 72px
+
+		}
+		.ybox-wrap {
+			margin-top: -52px;
+			width: 125px;
+			height: 91px;
+			background-position: -95px;
+		}
+	}
+}
+
+footer {
+	flex: 0 0 26px;
+	background-color: $black-color; 
+	color: $light-gray-color;
+	font-size: $base-fs;
+	line-height: 22px;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center; 
+}

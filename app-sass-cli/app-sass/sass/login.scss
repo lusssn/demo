@@ -2,18 +2,22 @@
 @import "mixin";
 @import "compass/reset";
 
-body {
+html {
 	font-family: $login-base-ff;
-    font-size: $login-base-fs;
+    font-size: $base-fs;
     width: 100%;
     height: 100%;
-    margin: 0;
-    padding: 0;
-    color: $dark-gray-color;
-    background: url(../images/grunge_wall.jpg);
+    background: url(../images/grunge_wall_1.jpg);
 }
 
-.container {
+body {
+	width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+    color: $dark-gray-color;
+}
+
+.login-container {
 	@include elm-centered(relative, 940px);
     width: 940px;
     height: 50%;
@@ -25,7 +29,7 @@ header {
     width: 100%;
     align-items: flex-end;
     justify-content: space-between;
-    @at-root .logo,
+    @at-root .login-logo,
     .share-link {
 	    width: 11%;
 	}
@@ -50,17 +54,17 @@ header {
 }
 
 
-.main,
+.login-main,
 .logo-icon {
     width: 100%;
 }
 
-.wrap hr {
+.login-wrap hr {
     height: 2px;
     background-color: $dark-gray-color;
 }
 
-.welcome {
+.login-welcome {
     display: flex;
     width: 100%;
     height: 80px;
@@ -89,7 +93,7 @@ header {
 	}
 }
 /* 附加文字样式 */
-.rider {
+.login-rider {
     font-size: $login-rider-fs;
     display: flex;
     margin-top: 8%;

@@ -1,13 +1,21 @@
-/* 字体变量 */
-$login-base-ff: Lucida Calligraphy;
-$login-base-fs: 14px;
+// 字体变量
+$login-base-ff: 'Lucida Calligraphy';
+$base-fs: 14px;
 $login-year-fs: 1.5em;
 $login-rider-fs: 1.75em;
 $login-rider-ws: 0.25em;
 
-/* 颜色变量 */
+$home-base-ff: 'Letter Gothic Std';
+$home-menu-fs: 22px;
+
+// 颜色变量
 $rose-red-color: #ff2465;
-$dark-gray-color: #5d5959;
-$light-gray-color: #e0e0e0;
+
+$dark-gray-color: #5d5d5d;
+$light-gray-color: #dcdcdc;
+
+$from-gray-color: #d7d7d7;
+$to-gray-color: $dark-gray-color;
+
 $white-color: #fff;
 $black-color: #000;
