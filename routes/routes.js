@@ -3,18 +3,23 @@ var login = require('./login');
 var home = require('./home');
 
 module.exports = function(app, router) {
-	app.get('/', function(req, res, next) {
+	app.use(function(req, res, next) {
+		req.session.accountStatus = req.session.accountStatus || 0;
+		next();
+	});
+
+	app.get('/', function(req, res) {
 		// 若已登录则跳转至主页面
-		if (login.getAccountStatus() == 1) {
+		if (req.session.accountStatus == 1) {
 			res.redirect('/home');
 		} else {
 			res.redirect('/login');
 		}
 	});
 
-	app.get('/login', function(req, res, next) {
+	app.get('/login', function(req, res) {
 		// 若已登录则跳转至主页面
-		if (login.getAccountStatus() == 1) {
+		if (req.session.accountStatus == 1) {
 			res.redirect('/home');
 		} else {
 			index.index(req, res);
@@ -23,7 +28,7 @@ module.exports = function(app, router) {
 
 	// 主界面
     router.get('/', function(req, res) {
-    	if (login.getAccountStatus() == 1) {
+    	if (req.session.accountStatus == 1) {
     		home.index(req, res);
     	} else {
     		res.redirect('/login');
@@ -31,11 +36,11 @@ module.exports = function(app, router) {
     });
 
     // 登录
-    router.post('/sign-in', function(req, res) {
-    	login.signIn(req, res);
-    });
+    router.post('/sign-in', login.api.signIn);
     // 注册
-    router.post('/sign-up', login.signUp);
+    router.post('/sign-up', login.api.signUp);
+    // 退出
+    router.post('/logout', login.api.logout);
 
     app.use('/login', router);
 	app.use('/home', router);

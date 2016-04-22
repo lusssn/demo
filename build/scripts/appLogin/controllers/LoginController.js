@@ -1,6 +1,6 @@
-var loginModule = angular.module("loginModule", []);
+var loginModule = angular.module("loginModule", ['ngCookies']);
 
-loginModule.controller("LoginController", ["$scope", "$http", function($scope, $http) {
+loginModule.controller("LoginController", ["$scope", "$http", "$cookies", function($scope, $http, $cookies) {
 	$scope.userInfo = {
 		uid: 0,
 		nickname: "",
@@ -39,23 +39,25 @@ loginModule.controller("LoginController", ["$scope", "$http", function($scope, $
 	// 登录事件
 	$scope.signIn = function() {
 		$http({
-			method: 'POST',
-			url: '/login/sign-in',
+			method: "POST",
+			url: "/login/sign-in",
 			data: {
 				nickname: $scope.nickname,
 				password: $scope.password
 			},
-			responseType: 'json'
+			responseType: "json"
 		}).success(function(data) {
-			console.log(data);
 			if (data.success) {
 				var dataObj = data.data;
+				// 回填用户信息
 				for(var key in dataObj) {
 					$scope.userInfo[key] = dataObj[key];
 				}
-				console.log(data.data);
+				$cookies.put("nickname", $scope.userInfo.nickname);
 				alert(data.msg);
-				window.location.href = data.redirect;
+				if (data.redirect) {
+					window.location.href = data.redirect;
+				}
 			} else {
 				$(".login-group input").val("");
 				alert(data.msg);
@@ -68,10 +70,10 @@ loginModule.controller("LoginController", ["$scope", "$http", function($scope, $
 	// 注册事件
 	$scope.signUp = function() {
 		$http({
-			method: 'POST',
-			url: '/login/sign-up',
+			method: "POST",
+			url: "/login/sign-up",
 			data: $scope.userInfo,
-			responseType: 'json'
+			responseType: "json"
 		}).success(function(data) {
 			if (data.success) {
 				alert(data.msg);
@@ -79,6 +81,32 @@ loginModule.controller("LoginController", ["$scope", "$http", function($scope, $
 			} else {
 				$(".register-group input").val("");
 				alert(data.msg);
+			}
+		}).error(function(data) {
+			alert('error ' + data);
+		});
+	};
+
+	// 退出登录事件
+	$scope.logout = function() {
+		if (!$cookies.get("nickname")) {
+			alert("Login has expired");
+			window.location.href = '/';
+		} 
+
+		$http({
+			method: "POST",
+			url: "/login/logout",
+			data: {nickname: $cookies.get("nickname")},
+			responseType: "json"
+		}).success(function(data) {
+			if (data.success) {
+				if (data.redirect) {
+					$cookies.remove("nickname")
+					window.location.href = data.redirect;
+				}
+			} else {
+				alert("logout failed: " + data.msg);
 			}
 		}).error(function(data) {
 			alert('error ' + data);

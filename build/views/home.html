@@ -3,8 +3,11 @@
 <head>
 	<title>Y Box</title>
 	<link rel="stylesheet" type="text/css" href="/styles/home.css">
+	<script type="text/javascript" src="/angular/angular.min.js"></script>
+	<script type="text/javascript" src="/angular-cookies/angular-cookies.min.js"></script>
+	<script type="text/javascript" src="/scripts/appLogin/controllers/LoginController.js"></script>
 </head>
-<body>
+<body ng-app="loginModule">
 	<div class="home-container">
 		<header></header>
 		<div class="home-main">
@@ -13,7 +16,7 @@
 					<h3>LUSSSN</h3>
 					<h3>BOXES</h3>
 				</section>
-				<ul class="menus">
+				<ul class="menus" ng-controller="LoginController">
 					<li class="active">HOME</li>
 					<li>ABOUT</li>
 					<li>ARTICLE</li>
@@ -21,7 +24,7 @@
 					<li>BOX</li>
 					<li>SETTING</li>
 					<li>CONTACT</li>
-					<li>LOGOUT</li>
+					<li ng-click="logout()">LOGOUT</li>
 				</ul>
 			</div>
 			<div class="middle-content">

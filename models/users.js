@@ -6,7 +6,7 @@ var Log = require('./log4js').logger;
 
 db.on("error",console.error.bind(console,"连接错误:"));
 db.once("open",function(){
-	Log.info("[REGISTER] MongoDB connect to '" + dbName + "' successful");
+	Log.info("MongoDB connect to '" + dbName + "' successful");
 });
 
 var UserSchema = new Schema({
@@ -34,14 +34,21 @@ UserSchema.statics.checkDupliUser = function(nickname, callback) {
 var UserModel = db.model('users', UserSchema);
 
 /* 
- * [methods]根据用户昵称、密码查询非注销的用户 
+ * [methods]根据用户昵称查询非注销的用户 
  */
 UserSchema.methods.findUser = function(callback) {
-    UserModel.findOne({nickname: this.nickname, password: this.password})
+    UserModel.findOne({nickname: this.nickname})
         .nor([{status: 2}])
         .exec(callback);
 };
-
+/*
+ * [methods]根据用户昵称更新用户状态
+ */
+UserSchema.methods.updateUserStatus = function(status, callback) {
+    var condition = {nickname: this.nickname};
+    UserModel.findOneAndUpdate(condition, {status: status})
+        .exec(callback);
+};
 
 /*
  * [methods]新增用户信息
